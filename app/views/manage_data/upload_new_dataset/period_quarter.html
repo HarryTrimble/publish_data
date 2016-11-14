@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  Publish government data
+{% endblock %}
+
+{% block proposition_header %}
+  {% include "includes/propositional_navigation_service.html" %}
+{% endblock %}
+
+{% block header_class %}
+  with-proposition
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+{% include "includes/phase_banner_alpha.html" %}
+
+  <div class="grid-row">
+
+    {% include "includes/side-navigation.html" %}
+
+    <div class="column-two-thirds">
+
+      <form
+          method="post"
+          action="{% if query.change == 1 %}check{% else %}file_upload{% endif %}"
+          class="form">
+
+        <h1 class="heading-large">
+          What time period does this file cover?
+        </h1>
+
+        <fieldset>
+          <legend class="visuallyhidden">
+            Time period
+          </legend>
+
+          {% set frequencies=[
+          ['Q1 (April to June)', 'Q1'],
+          ['Q2 (July to September)', 'Q2'],
+          ['Q3 (October to December)', 'Q3'],
+          ['Q4 (January to March)', 'Q4']
+          ] %}
+
+
+          <div class="form-group">
+            {% for frequency in frequencies %}
+              <label for="{{frequency[1]}}" class="block-label">
+                <input
+                  type="radio"
+                  id="{{frequency[1]}}"
+                  name="period-quarter"
+                  value="{{frequency[1]}}"
+                  {% if data.newSet.frequency == frequency[1] %}
+                    checked
+                  {% endif %}
+                />
+                  {{frequency[0]}}
+              </label>
+            {% endfor %}
+          </div>
+
+        </fieldset>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue" />
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}

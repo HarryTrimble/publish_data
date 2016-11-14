@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  Publish government data
+{% endblock %}
+
+{% block proposition_header %}
+  {% include "includes/propositional_navigation_service.html" %}
+{% endblock %}
+
+{% block header_class %}
+  with-proposition
+{% endblock %}
+
+{% block content %}
+
+  <main id="content" role="main">
+
+    {% include "includes/phase_banner_alpha.html" %}
+
+    <div class="grid-row">
+
+      {% include "includes/side-navigation.html" %}
+
+      <div class="column-two-thirds">
+
+        <form
+            method="post"
+            action="{% if query.change == 1 %}check{% else %}themes_auto{% endif %}"
+            class="form">
+
+          <h1 class="heading-large">
+            Choose a licence
+          </h1>
+
+          <p>
+            Most datasets are published under the Open Government Licence.
+          </p>
+
+          <fieldset>
+            <legend class="visuallyhidden">
+              Choose a licence
+            </legend>
+
+            <div class="form-group">
+              <label for="notify-1" class="block-label">
+                <input
+                    type="radio"
+                    id="notify-1"
+                    name="licence"
+                    value="Open Government Licence"
+                    {% if (data.newSet.licence == "Open Government Licence") %}
+                      checked
+                    {% endif %}
+                />
+                Open Government Licence
+              </label>
+
+              <label for="notify-2" class="block-label">
+                <input
+                    type="radio"
+                    id="notify-2"
+                    name="licence"
+                    value="INSPIRE"
+                    {% if (data.newSet.licence == "INSPIRE") %}
+                      checked
+                    {% endif %}
+                />
+                INSPIRE
+              </label>
+
+              <label for="other" class="block-label" data-target="other-licence-panel">
+                <input
+                    type="radio"
+                    id="other"
+                    name="licence"
+                    value="Other"
+                    {% if (data.newSet.licence == "Other") %}
+                      checked
+                    {% endif %}
+                />
+
+                Other (please specify)
+              </label>
+
+              <div
+                  class="panel panel-border-narrow js-hidden"
+                  id="other-licence-panel">
+                <label
+                    class="form-label"
+                    for="other-licence"
+                    class="visuallyhidden">
+                  Name of your licence
+                </label>
+                <input
+                    class="form-control"
+                    type="text"
+                    name="other-licence"
+                    id="other-licence"
+                    value="{{ data.newSet.otherLicence }}"/>
+              </div>
+            </div>
+
+          </fieldset>
+
+          <div class="form-group">
+            <input type="submit" class="button" value="Continue" />
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+
+  </main>
+{% endblock %}
