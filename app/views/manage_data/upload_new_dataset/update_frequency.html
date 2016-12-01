@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  Publish government data
+{% endblock %}
+
+{% block proposition_header %}
+  {% include "includes/propositional_navigation_service.html" %}
+{% endblock %}
+
+{% block header_class %}
+  with-proposition
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+{% include "includes/phase_banner_alpha.html" %}
+
+  <div class="grid-row">
+
+    {% include "includes/side-navigation.html" %}
+
+    <div class="column-two-thirds">
+
+      <form
+          method="post"
+          action="frequency_routing{% if query.change == 1 %}?change=1{% endif %}"
+          class="form">
+
+        <h1 class="heading-large">
+          How often is this dataset updated?
+        </h1>
+
+        <fieldset>
+          <legend class="visuallyhidden">
+            Update frequency
+          </legend>
+
+          {% set frequencies=[['Every day', 'day'],
+                              ['Every week', 'week'],
+                              ['Every month', 'month'],
+                              ['Every quarter', 'quarter'],
+                              ['Every year (January to December)', 'calendar-year'],
+                              ['Every financial year (April to March)', 'financial-year'],
+                              ['Never', 'none']
+                             ] %}
+
+
+          <div class="form-group">
+            {% for frequency in frequencies %}
+              <label for="{{frequency[1]}}" class="block-label">
+                <input
+                  type="radio"
+                  id="{{frequency[1]}}"
+                  name="frequency"
+                  value="{{frequency[1]}}"
+                  {% if data.newSet.frequency == frequency[1] %}
+                    checked
+                  {% endif %}
+                />
+                  {{frequency[0]}}
+              </label>
+            {% endfor %}
+          </div>
+
+        </fieldset>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue" />
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}

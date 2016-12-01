@@ -1,0 +1,115 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  Publish government data
+{% endblock %}
+
+{% block proposition_header %}
+  {% include "includes/propositional_navigation_service.html" %}
+{% endblock %}
+
+{% block header_class %}
+  with-proposition
+{% endblock %}
+
+{% block content %}
+
+  <main id="content" role="main">
+
+    {% include "includes/phase_banner_alpha.html" %}
+
+    <div class="grid-row">
+
+      {% include "includes/side-navigation.html" %}
+
+      <div class="column-two-thirds">
+
+        {% if query.error %}
+          <div
+            class="error-summary"
+            role="group"
+            aria-labelledby="error-summary-heading-example-1"
+            tabindex="-1">
+            <h1
+              class="heading-medium error-summary-heading"
+              id="error-summary-heading-example-1">
+              Error on spend-data-february.csv
+            </h1>
+
+            <ul>
+              <li>Cell B2 contains invalid characters</li>
+              <li>Cell B4 should have the symbol £</li>
+            </ul>
+
+          </div>
+        {% endif %}
+
+
+        <h1 class="heading-large">
+          {% if index %}
+            Edit a link
+          {% else %}
+            Add a link
+          {% endif %}
+        </h1>
+
+        <form method="post" action="{% if index %}submit{% else %}links{% endif %}" class="form">
+
+          <div class="form-group">
+            <label class="form-label bold" for="link-url">
+              URL
+            </label>
+            <p>
+              Enter a link (beginning with <code>http://</code> or
+              <code>https://</code>) to the page where your data file
+              has been uploaded.
+            </p>
+            <p>
+              This might be your organisation’s website or another
+              website, such as GOV.UK or Amazon Web Services (AWS).
+            </p>
+
+            <input
+                class="form-control form-control-2-3"
+                id="link-url"
+                name="link-url"
+                type="text"
+                placeholder="http:// or https://"
+                value="{{ data.newSet.links[0].url }}">
+          </div>
+
+
+          <div class="form-group">
+            <label class="form-label bold" for="link-title">
+            Title
+            </label>
+            <span class="form-hint">
+              Give your link a descriptive title to help users understand what
+              data it contains. The title shouldn’t be the same as the URL.
+            </span>
+            <input
+                class="form-control form-control-2-3"
+                id="link-title"
+                name="link-title"
+                type="text"
+                value="{{ data.newSet.links[0].title }}">
+          </div>
+
+          <div class="form-group">
+            {% if query.error %}
+              <div>
+                <input type="hidden" value="yes" name="after_error" />
+                <input type="submit" class="button" value="Check again" />
+              </div>
+              <p>
+                <a href="links">Continue with errors</a>
+              </p>
+            {% else %}
+              <input type="submit" class="button" value="Check for errors" />
+            {% endif %}
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+{% endblock %}

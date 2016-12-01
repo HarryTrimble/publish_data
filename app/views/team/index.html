@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  Publish government data
+{% endblock %}
+
+{% block proposition_header %}
+  {% include "includes/propositional_navigation_service.html" %}
+{% endblock %}
+
+{% block header_class %}
+  with-proposition
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+{% include "includes/phase_banner_alpha.html" %}
+
+  <div class="grid-row">
+
+    {% include "includes/side-navigation.html" %}
+
+    <div class="column-two-thirds">
+
+        <h1 class="heading-large">
+          Team members
+        </h1>
+
+        <div class="form-group">
+          <a class="button" href="/team/invite">Invite team member</a>
+        </div>
+
+
+        <div class="grid-row bordered"></div>
+
+        <!-- Foreach user -->
+        <div class="grid-row bordered font-xsmall">
+          <div class="column-full team-member-name">
+            Louise Petre - <a href="/team/user_permissions">edit</a>
+            <a href="#">remove</a>
+          </div>
+          <div class="column-one-quarter font-xsmall">
+            <img src="/public/images/tick.svg"/>
+            Create datasets
+          </div>
+          <div class="column-one-quarter font-xsmall">
+            <img src="/public/images/tick.svg"/>
+            Publish datasets
+          </div>
+          <div class="column-one-quarter font-xsmall">
+            <img src="/public/images/tick.svg"/>
+            Manage Harvest
+          </div>
+          <div class="column-one-quarter font-xsmall">
+            <img src="/public/images/tick.svg"/>
+            Manage Team
+          </div>
+        </div>
+        <!-- end foreach user -->
+
+        <div class="grid-row bordered font-xsmall">
+          <div class="column-full team-member-name">
+            Maria Izquierdo - <a href="/team/user_permissions">edit</a>
+            <a href="#">remove</a>
+          </div>
+          <div class="column-one-quarter font-xsmall">
+            <img src="/public/images/tick.svg"/>
+            Create datasets
+          </div>
+          <div class="column-one-quarter font-xsmall">
+            <img src="/public/images/tick.svg"/>
+            Publish datasets
+          </div>
+          <div class="column-one-quarter font-xsmall">
+            <img src="/public/images/tick.svg"/>
+            Manage Harvest
+          </div>
+          <div class="column-one-quarter font-xsmall">
+            <img src="/public/images/tick.svg"/>
+            Manage Team
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</main>
+{% endblock %}
