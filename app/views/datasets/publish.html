@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  Publish government data
+{% endblock %}
+
+{% block proposition_header %}
+  {% include "includes/propositional_navigation_service.html" %}
+{% endblock %}
+
+{% block header_class %}
+  with-proposition
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+{% include "includes/phase_banner_alpha.html" %}
+
+
+  <div class="grid-row">
+
+    {% include "includes/side-navigation.html" %}
+
+    <div class="column-two-thirds">
+
+      <form method="get" action="/menu" class="form">
+
+      {{formData | safe}}
+
+        <h1 class="heading-large">
+          Publish dataset
+        </h1>
+
+        <p>You can choose to publish this dataset immediately, or choose a date and time when it will be published automatically</p>
+
+        <fieldset>
+          <legend class="visuallyhidden">
+            Publish dataset
+          </legend>
+
+          <div class="form-group">
+            <label for="now" class="block-label">
+              <input type="radio" id="now" name="goto" value="/datasets/publish_done">
+              Publish immediately
+            </label>
+
+            <label for="date-time" class="block-label">
+              <input type="radio" id="date-time" name="goto" value="/datasets/publish_when">
+              Publish at a specified date and time
+            </label>
+
+          </div>
+
+        </fieldset>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue" />
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}

@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block proposition_header %}
-  {% include "includes/propositional_navigation_signed_in.html" %}
+  {% include "includes/propositional_navigation_service.html" %}
 {% endblock %}
 
 {% block header_class %}
@@ -16,7 +16,7 @@
 
 <main id="content" role="main">
 
-{% include "includes/phase_banner_beta.html" %}
+{% include "includes/phase_banner_alpha.html" %}
 
 
   <div class="grid-row">
@@ -25,7 +25,7 @@
 
     <div class="column-two-thirds">
 
-      <form method="get" action="/manage_data/upload_new_dataset/title_summary" class="form">
+      <form method="get" action="/menu" class="form">
 
       {{formData | safe}}
 
@@ -39,24 +39,24 @@
           </legend>
 
           <div class="form-group">
-            <label for="create-dataset" class="block-label">
-              <input type="radio" id="create-dataset" name="create-dataset" value="yes">
-              Upload a new dataset
-            </label>
-
             <label for="update-dataset" class="block-label">
-              <input type="radio" id="update-dataset" name="update-dataset" value="no">
-              Update or add to a existing dataset
+              <input type="radio" id="update-dataset" name="goto" value="/manage_data/upload_new_data">
+              Add data to a existing dataset
             </label>
 
-            <label for="pull-data" class="block-label">
-              <input type="radio" id="pull-data" name="pull-data" value="no">
-              Pull data: we’ll harvest your data
+            <label for="create-dataset" class="block-label">
+              <input type="radio" id="create-dataset" name="goto" value="/manage_data/upload_new_dataset/title_summary">
+              Create a new dataset
+            </label>
+
+            <label for="edit-dataset" class="block-label">
+              <input type="radio" id="edit-dataset" name="goto" value="/datasets">
+              Edit a dataset
             </label>
 
             <label for="push-data-to-api" class="block-label">
-              <input type="radio" id="push-data-to-api" name="push-data-to-api" value="no">
-              Push data to API integration
+              <input type="radio" id="push-data-to-api" name="goto" value="/manage_data/push">
+              Push data via the API
             </label>
 
           </div>

@@ -56,6 +56,24 @@ app.use('/public', express.static(__dirname + '/govuk_modules/govuk_template/ass
 app.use('/public', express.static(__dirname + '/govuk_modules/govuk_frontend_toolkit'));
 app.use('/public/images/icons', express.static(__dirname + '/govuk_modules/govuk_frontend_toolkit/images'));
 
+
+// Sessions
+var session = require('express-session');
+
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  genid: function(req) {
+    return new Date().getTime() + '-' + Math.random();
+  },
+  cookie: {
+    secure: 'auto'
+  }
+}));
+
+
+
 // Elements refers to icon folder instead of images folder
 app.use(favicon(path.join(__dirname, 'govuk_modules', 'govuk_template', 'assets', 'images','favicon.ico')));
 
@@ -77,7 +95,7 @@ app.use(function (req, res, next) {
   res.locals.cookieText=config.cookieText;
   res.locals.releaseVersion="v" + releaseVersion;
   // Changes GOV.UK in head to 'Prototype'
-  res.locals.global_header_text = "GOV.UK";
+  res.locals.global_header_text = "data.gov.uk";
   next();
 });
 

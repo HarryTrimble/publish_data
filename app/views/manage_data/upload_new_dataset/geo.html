@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  Choose an area - Publish government data
+{% endblock %}
+
+{% block proposition_header %}
+  {% include "includes/propositional_navigation_service.html" %}
+{% endblock %}
+
+{% block header_class %}
+  with-proposition
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+  {% include "includes/phase_banner_alpha.html" %}
+
+
+  <div class="grid-row">
+
+    {% include "includes/side-navigation.html" %}
+
+    <div class="column-two-thirds">
+
+      <form
+          method="post"
+          action="{% if query.change == 1 %}check{% else %}update_frequency{% endif %}"
+          class="form">
+
+        <h1 class="heading-large">
+          Choose an area
+        </h1>
+
+        <fieldset>
+          <legend class="visuallyhidden">
+            Geographical coverage of the dataset
+          </legend>
+
+          <p>
+            Which area does your dataset cover? You must choose at least one
+            of the following.
+          </p>
+
+          {% set regions=[['England', 'england'],
+                          ['Wales', 'wales'],
+                          ['Scotland', 'scotland'],
+                          ['Northern Ireland', 'ni'],
+                          ['Overseas', 'overseas']
+                         ] %}
+
+
+          <div class="form-group">
+            {% for region in regions %}
+              <label for="{{region[1]}}" class="block-label">
+                <input
+                  type="checkbox"
+                  id="{{region[1]}}"
+                  name="geo"
+                  value="{{region[0]}}"
+                  {% if (data.newSet.geo and data.newSet.geo.indexOf(region[0]) !== -1) %}
+                    checked
+                  {% endif %}
+                />
+                {{region[0]}}
+              </label>
+            {% endfor %}
+          </div>
+
+        </fieldset>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Continue" />
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}

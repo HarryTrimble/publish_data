@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  Publish government data
+{% endblock %}
+
+{% block proposition_header %}
+  {% include "includes/propositional_navigation_service.html" %}
+{% endblock %}
+
+{% block header_class %}
+  with-proposition
+{% endblock %}
+
+{% block content %}
+
+  <main id="content" role="main">
+
+    {% include "includes/phase_banner_alpha.html" %}
+
+    <div class="grid-row">
+
+      {% include "includes/side-navigation.html" %}
+
+      <div class="column-two-thirds">
+        <h1 class="heading-large">
+          Dataset links
+        </h1>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Url</th>
+              <th>Valid</th>
+              <th><span class="visuallyhidden">actions</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for link in data.newSet.links %}
+              <tr>
+                <td>{{ link.title }}</td>
+                <td>{{ link.url }}</td>
+                <td>
+                  {% if link.isValid %}
+                    <span class="link-valid">✔</span>
+                  {% else %}
+                    <span class="link-invalid">✘</span>
+                  {% endif %}
+                </td>
+                <td>
+                  <a href="links/edit/{{ loop.index -1 }}/">Edit</a>
+                  <a href="links/delete/{{ loop.index -1 }}/">Delete</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <br/>
+        <form
+            method="post"
+            action="{% if query.change == 1 %}check{% else %}want_notifications{% endif %}"
+            class="form">
+          <div class="form-group">
+            <input type="submit" class="button" value="Continue"/>
+          </div>
+        </form>
+
+        <div class="form-group">
+          <a href="link">Add another link</a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+{% endblock %}
