@@ -1,0 +1,402 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  Publish government data
+{% endblock %}
+
+{% block proposition_header %}
+  {% include "includes/propositional_navigation_service.html" %}
+{% endblock %}
+
+{% block header_class %}
+  with-proposition
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+{% include "includes/phase_banner_alpha.html" %}
+
+  <div class="grid-row">
+
+    {% include "includes/side-navigation.html" %}
+
+    <div class="column-two-thirds">
+
+      <h1 class="heading-large">
+        Edit {{ dataset.title }}
+      </h1>
+
+      <form action="edit_submit" method="post" class="form compact">
+
+        <input type="hidden" name="index" value="{{ index }}"/>
+
+
+        <!-- ################ TITLE ################  -->
+
+
+        <div class="form-group">
+          <label class="form-label bold" for="title">Title</label>
+          <input
+              class="form-control"
+              type="text"
+              name="title-dataset"
+              value="{{ dataset.title }}"
+              id="title"/>
+        </div>
+
+        <!-- ################ DESCRIPTION ################  -->
+
+        <div class="form-group">
+          <label class="form-label bold" for="summary">Description</label>
+          <textarea
+              class="form-control"
+              name="summary-dataset"
+              id="summary">{{ dataset.summary }}</textarea>
+        </div>
+
+        <!-- ################ LINKS ################  -->
+
+        <fieldset>
+          <legend>Links</legend>
+          <ul>
+            {% for link in dataset.links %}
+              <li class="form-group">
+                <input
+                    class="form-control inline title"
+                    type="text"
+                    name="link-title"
+                    value="{{ link.title }}"/>
+                <input
+                    class="form-control inline url"
+                    type="text"
+                    name="link-url"
+                    value="{{ link.url }}"
+                    id="url"/>
+              </li>
+            {% endfor %}
+            <li class="form-group">
+              <label>Add new:</label>
+              <br/>
+              <input
+                  class="form-control inline title"
+                  type="text"
+                  name="link-title"
+                  placeholder="New title"
+                  value=""/>
+              <input
+                  class="form-control inline url"
+                  type="text"
+                  name="link-url"
+                  placeholder="New URL"
+                  value=""
+                  id="url"/>
+            </li>
+          </ul>
+        </fieldset>
+
+        <!-- ################ GEO ################  -->
+
+        <fieldset>
+          <legend>Areas</legend>
+
+          {% set areas=[['England', 'england'],
+          ['Wales', 'wales'],
+          ['Scotland', 'scotland'],
+          ['Northern Ireland', 'ni'],
+          ['Overseas', 'overseas']
+          ] %}
+
+
+          <div class="form-group">
+            {% for area in areas %}
+            <label for="{{area[1]}}" class="small-label">
+              <input
+                  type="checkbox"
+                  id="{{area[1]}}"
+                  name="geo"
+                  value="{{area[0]}}"
+                  {% if (dataset.geo and dataset.geo.indexOf(area[0]) !== -1) %}
+                  checked
+                  {% endif %}
+              />
+              {{area[0]}}
+            </label>
+            {% endfor %}
+
+          </div>
+        </fieldset>
+
+        <!-- ################ LICENCE ############### -->
+
+        <fieldset>
+          <legend>
+            licence
+          </legend>
+
+          <div class="form-group">
+            <label for="notify-1" class="small-label">
+              <input
+                  type="radio"
+                  id="notify-1"
+                  name="licence"
+                  value="Open Government Licence"
+                  {% if (dataset.licence == "Open Government Licence") %}
+                  checked
+                  {% endif %}
+              />
+              Open Government Licence
+            </label>
+
+            <label for="notify-2" class="small-label">
+              <input
+                  type="radio"
+                  id="notify-2"
+                  name="licence"
+                  value="INSPIRE"
+                  {% if (dataset.licence == "INSPIRE") %}
+                  checked
+                  {% endif %}
+              />
+              INSPIRE
+            </label>
+
+            <label for="other" class="small-label" data-target="other-licence-panel">
+              <input
+                  type="radio"
+                  id="other"
+                  name="licence"
+                  value="Other"
+                  {% if (dataset.licence == "Other") %}
+                  checked
+                  {% endif %}
+              />
+              Other:
+              <input
+                  class="inline"
+                  type="text"
+                  name="other-licence"
+                  id="other-licence"
+                  value="{{ dataset.otherLicence }}"/>
+
+
+            </label>
+          </div>
+
+        </fieldset>
+
+        <!-- ########### UPDATE FREQUENCY ########## -->
+
+        <fieldset>
+          <legend>
+            Updates
+          </legend>
+
+          {% set frequencies=[['Every day', 'day'],
+          ['Every week', 'week'],
+          ['Every month', 'month'],
+          ['Every quarter', 'quarter'],
+          ['Every year', 'year'],
+          ['No set schedule', 'none']
+          ] %}
+
+          <div class="form-group">
+            {% for frequency in frequencies %}
+            <label for="{{frequency[1]}}" class="small-label">
+              <input
+                  type="radio"
+                  id="{{frequency[1]}}"
+                  name="frequency"
+                  value="{{frequency[1]}}"
+                  {% if dataset.frequency == frequency[1] %}
+                  checked
+                  {% endif %}
+              />
+              {{frequency[0]}}
+            </label>
+            {% endfor %}
+          </div>
+
+          <div class="form-date form-group {% if dataset.frequency != 'week' %}js-hidden{% endif %}" id="frequency-week-start">
+            <p>Start date</p>
+            <div class="form-group form-group-day">
+              <label class="form-label visuallyhidden" for="start-day">Day</label>
+              <input
+                  class="form-control"
+                  id="start-day"
+                  name="start-day"
+                  type="number"
+                  pattern="[0-9]*"
+                  min="0"
+                  max="31"
+                  value="{{ dataset.startDay }}"
+                  aria-describedby="start-hint">
+              /
+            </div>
+            <div class="form-group form-group-month">
+              <label class="form-label visuallyhidden" for="start-month">Month</label>
+              <input
+                  class="form-control"
+                  id="start-month"
+                  name="start-month"
+                  type="number"
+                  pattern="[0-9]*"
+                  min="0"
+                  max="12"
+                  value="{{ dataset.startMonth }}">
+              /
+            </div>
+            <div class="form-group form-group-year">
+              <label class="form-label visuallyhidden" for="start-year">Year</label>
+              <input
+                  class="form-control"
+                  id="start-year"
+                  name="start-year"
+                  type="number"
+                  pattern="[0-9]*"
+                  min="0"
+                  value="{{ dataset.startYear }}">
+            </div>
+          </div>
+
+          <div class="form-date form-group {% if dataset.frequency != 'week' %}js-hidden{% endif %}" id="frequency-week-end">
+            <p>End date</p>
+            <div class="form-group form-group-day">
+              <label class="form-label visuallyhidden" for="end-day">Day</label>
+              <input
+                  class="form-control"
+                  id="end-day"
+                  name="end-day"
+                  type="number"
+                  pattern="[0-9]*"
+                  min="0"
+                  max="31"
+                  value="{{ dataset.endDay }}"
+                  aria-describedby="end-hint">
+              /
+            </div>
+            <div class="form-group form-group-month">
+              <label class="form-label visuallyhidden" for="end-month">Month</label>
+              <input
+                  class="form-control"
+                  id="end-month"
+                  name="end-month"
+                  type="number"
+                  pattern="[0-9]*"
+                  min="0"
+                  max="12"
+                  value="{{ dataset.endMonth }}">
+              /
+            </div>
+            <div class="form-group form-group-year">
+              <label class="form-label visuallyhidden" for="end-year">Year</label>
+              <input
+                  class="form-control"
+                  id="end-year"
+                  name="end-year"
+                  type="number"
+                  pattern="[0-9]*"
+                  min="0"
+                  value="{{ dataset.endYear }}">
+            </div>
+          </div>
+
+          <div class="form-date form-group {% if dataset.frequency != 'month' %}js-hidden{% endif %}" id="frequency-month">
+            <p>Time period</p>
+            <div class="form-group form-group-month">
+              <label class="form-label visuallyhidden" for="period-month">Month</label>
+              <input
+                  class="form-control"
+                  id="period-month"
+                  name="period-month"
+                  type="number"
+                  pattern="[0-9]*"
+                  min="0"
+                  max="12"
+                  value="{{ dataset.periodMonth }}">
+              /
+            </div>
+            <div class="form-group form-group-year">
+              <label class="form-label visuallyhidden" for="period-year">Year</label>
+              <input
+                  class="form-control"
+                  id="period-year"
+                  name="period-year"
+                  type="number"
+                  pattern="[0-9]*"
+                  min="0"
+                  value="{{ dataset.periodYear }}">
+            </div>
+          </div>
+
+          <div class="form-date form-group {% if dataset.frequency != 'year' %}js-hidden{% endif %}" id="frequency-year">
+            <p>Time period</p>
+            <div class="form-group form-group-year">
+              <label class="form-label visuallyhidden" for="period-year">Year</label>
+              <input
+                  class="form-control"
+                  id="period-year"
+                  name="period-year"
+                  type="number"
+                  pattern="[0-9]*"
+                  min="0"
+                  value="{{ dataset.periodYear }}">
+            </div>
+          </div>
+
+          <div class="form-group {% if dataset.frequency != 'quarter' %}js-hidden{% endif %}" id="frequency-quarter">
+            <select name="period-quarter">
+              <option value="first">First quarter</option>
+              <option value="second">Second quarter</option>
+              <option value="third">Third quarter</option>
+              <option value="fourth">Fourth quarter</option>
+            </select>
+          </div>
+
+        </fieldset>
+
+        <!-- ############## Receive Notifications ######### -->
+
+        <fieldset
+            class="{% if dataset.frequency == 'none' %}js-hidden{% endif %}"
+            id="notify">
+          <legend>
+            Update notifications
+          </legend>
+
+
+          <div class="form-group">
+            <label for="notify-1" class="small-label">
+              <input
+                  type="radio"
+                  id="notify-1"
+                  name="notify"
+                  value="yes"
+                  {% if dataset.notify == 'yes' %}checked{% endif %}
+              >
+              Yes
+            </label>
+
+            <label for="notify-2" class="small-label">
+              <input
+                  type="radio"
+                  id="notify-2"
+                  name="notify"
+                  value="no"
+                  {% if dataset.notify == 'no' %}checked{% endif %}
+              >
+              No
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="form-group">
+          <input type="submit" class="button" value="Done" />
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

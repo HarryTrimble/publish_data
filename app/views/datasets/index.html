@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  Publish government data
+{% endblock %}
+
+{% block proposition_header %}
+  {% include "includes/propositional_navigation_service.html" %}
+{% endblock %}
+
+{% block header_class %}
+  with-proposition
+{% endblock %}
+
+{% block content %}
+
+  <main id="content" role="main">
+
+    {% include "includes/phase_banner_alpha.html" %}
+
+    <div class="grid-row">
+
+
+      {% include "includes/side-navigation.html" %}
+
+
+      <div class="column-two-thirds" style="width:80%;">
+
+        <h1 class="heading-large">Manage data</h1>
+
+        {% if query.newset == 1 %}
+          <div class="govuk-box-highlight">
+            <h1 class="bold-large">
+              Your dataset has been published
+            </h1>
+          </div>
+        {% elif query.modified == 1 %}
+          <div class="govuk-box-highlight">
+            <h1 class="bold-large">
+              Your dataset has been edited
+            </h1>
+          </div>
+        {% elif query.deleted == 1 %}
+          <div class="govuk-box-highlight">
+            <h1 class="bold-large">
+              Your dataset has been deleted
+            </h1>
+          </div>
+        {% endif %}
+
+
+        <h2 class="heading-small">Find existing datasets</h2>
+        <div class="filtered-table">
+          <div class="filter-panel">
+            <label for="name">Filter by name: </label>
+            <input class="form-control" id="name" type="text">
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for set in data.sets %}
+                <tr class="{% if query.newset == 1 and loop.index == 1 %}just-added{%endif%}">
+                  <td class="name">{{ set.title }}</td>
+                  <td data-status="{{ set.status }}">{{ set.status }}</td>
+                  <td>
+                    <a href="/manage_data/upload_new_data/upload_data?">
+                      Add Data
+                    </a>
+                    <br/>
+                    <a href="/datasets/edit/{{ loop.index - 1 }}">Edit</a>
+                    <br/>
+                    <a href="/datasets/delete/{{ loop.index - 1 }}">Delete</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <div class="pagination">
+            1<span> </span>
+            <a href="#">2</a><span> </span>
+            <a href="#">3</a><span> </span>
+            <a href="#">4</a><span> </span>
+          </div>
+        </div>
+      </div>
+  </main>
+{% endblock %}

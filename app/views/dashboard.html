@@ -1,81 +1,348 @@
 {% extends "layout.html" %}
-
 {% block page_title %}
-  Publish government data
+  Dashboard - Publish data
 {% endblock %}
 
 {% block proposition_header %}
-  {% include "includes/propositional_navigation_signed_in.html" %}
+  {% include "includes/propositional_navigation_service.html" %}
 {% endblock %}
 
-{% block header_class %}
-  with-proposition
-{% endblock %}
+{% block header_class %} with-proposition {% endblock %}
 
 {% block content %}
+  <main id="content" role="main" class="dashboard">
+    {% include "includes/phase_banner_alpha.html" %}
+    <div class="grid-row">
+      {% include "includes/side-navigation.html" %}
+      <div class="column-two-thirds" style="width:80%;">
 
-<main id="content" role="main">
+        <h1 class="heading-medium">Dashboard</h1>
 
-{% include "includes/phase_banner_beta.html" %}
+        <section>
+          <div class="table-title">
+            <h2 class="heading-medium">
+              <span class="bignum">5</span> Update datasets
+            </h2>
+            <div><a href="#" class="font-xsmall">Show all</a></div>
+          </div>
+          <table class="todos">
+            <tbody>
+              <tr>
+                <td>
+                  Update ‘Building Price and Cost Indices’ by 3 November 2016
+                </td>
+                <td><span class="overdue">Overdue</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Update</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Update ‘Building Price and Cost Indices’ by 3 November 2016
+                </td>
+                <td><span class="overdue">Overdue</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Update</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Update ‘Building Price and Cost Indices’ by 3 November 2016
+                </td>
+                <td><span class="overdue">Overdue</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Update</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Update ‘Building Price and Cost Indices’ by 3 November 2016
+                </td>
+                <td><span class="overdue">Overdue</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Update</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Update ‘Building Price and Cost Indices’ by 3 November 2016
+                </td>
+                <td><span class="overdue">Overdue</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Update</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
 
-  <div class="grid-row">
+        <section>
+          <div class="table-title">
+            <h2 class="heading-medium"><span class="bignum">15</span> Fix datasets</h2>
+            <div><a href="#" class="font-xsmall">Show all</a></div>
+          </div>
+          <table class="todos">
+            <tbody>
+              <tr>
+                <td>
+                  Replace broken link in ‘Land registry price paid data’
+                </td>
+                <td><span>6 days ago</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Fix</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Replace broken link in ‘Land registry price paid data’
+                </td>
+                <td><span>6 days ago</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Fix</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Replace broken link in ‘Land registry price paid data’
+                </td>
+                <td><span>6 days ago</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Fix</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Replace broken link in ‘Land registry price paid data’
+                </td>
+                <td><span>6 days ago</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Fix</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Replace broken link in ‘Land registry price paid data’
+                </td>
+                <td><span>6 days ago</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Fix</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Replace broken link in ‘Land registry price paid data’
+                </td>
+                <td><span>6 days ago</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Fix</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Replace broken link in ‘Land registry price paid data’
+                </td>
+                <td><span>6 days ago</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Fix</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Replace broken link in ‘Land registry price paid data’
+                </td>
+                <td><span>6 days ago</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Fix</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Replace broken link in ‘Land registry price paid data’
+                </td>
+                <td><span>6 days ago</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Fix</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Replace broken link in ‘Land registry price paid data’
+                </td>
+                <td><span>6 days ago</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Fix</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Replace broken link in ‘Land registry price paid data’
+                </td>
+                <td><span>6 days ago</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Fix</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Replace broken link in ‘Land registry price paid data’
+                </td>
+                <td><span>6 days ago</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Fix</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Replace broken link in ‘Land registry price paid data’
+                </td>
+                <td><span>6 days ago</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Fix</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Replace broken link in ‘Land registry price paid data’
+                </td>
+                <td><span>6 days ago</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Fix</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Replace broken link in ‘Land registry price paid data’
+                </td>
+                <td><span>6 days ago</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Fix</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
 
-        
-    {% include "includes/side-navigation.html" %}
+        <section>
+          <div class="table-title">
+            <h2 class="heading-medium">
+              <span class="bignum">1</span>
+              Improve datasets
+            </h2>
+          </div>
+          <table class="todos">
+            <tbody>
+              <tr>
+                <td>
+                  Add missing data to ‘Land registry price paid’
+                </td>
+                <td><span>6 days ago</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Update</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <div class="table-title">
+            <h2 class="heading-medium">
+              <span class="bignum">2</span>
+              Manage accounts
+            </h2>
+          </div>
+          <table class="todos">
+            <tbody>
+              <tr>
+                <td>
+                  Delete Maria Izquierdo’s account
+                </td>
+                <td><span>3 days ago</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Delete</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Give ‘editor’ permissions to Max Froumentin
+                </td>
+                <td><span>3 days ago</span></td>
+                <td class="actions">
+                  <a class="update" href="#">Approve</a>
+                  <a href="#">Skip</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
 
 
-    <div class="column-two-thirds" style="width:80%;">
-
-      <form method="get" action="/questions/place_type" class="form">
-
-      {{formData | safe}}
-
-        <h1 class="heading-large">
-          Dashboard
-        </h1>
-
-        <br>
-
-        <!-- search box -->
-        <div class="in-manual-search">
-          <form action="/search">
-                 <input type="hidden" name="filter_manual[]" value="/guidance/content-design">
-                 <input id="search-box" type="text" name="q" placeholder="search your datasets">
-                 <button type="submit">search</button>
-          </form>
+        <h2 class="heading-medium">Most popular</h2>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Downloads</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="clickable-row">
+                <td>Land registry price paid data</td>
+                <td>
+                  <span class="nb-downloads">125</span>
+                  <span class="text-supporting">
+                    <span class="data-neutral-arrow">&#9650;</span>
+                    +1% since Sep 2015
+                  </span>
+                </td>
+              </tr>
+              <tr class="clickable-row">
+                <td>UK House Price Index</td>
+                <td>
+                  <span class="nb-downloads">12</span>
+                  <span class="text-supporting">
+                    <span class="data-neutral-arrow">&#9650;</span>
+                    +1% since Sep 2015
+                  </span>
+                </td>
+              </tr>
+              <tr class="clickable-row">
+                <td>Monthly property transaction data</td>
+                <td>
+                  <span class="nb-downloads">5</span>
+                  <span class="text-supporting">
+                    <span class="data-neutral-arrow">▼</span>
+                    -1% since Sep 2015
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-
-        <br>
-        <br>
-
-        <div class="column-one-half" id="dashboard-panel">
-          <p>Published datasets</p>
-          <h2 class="bold-xlarge"><a href="#">592</a></h2>
-        </div>
-
-        <div class="column-one-half" id="dashboard-panel">
-          <p>Downloads</p>
-          <h2 class="bold-xlarge"><a href="#">2</a></h2>
-        </div>
-        
-        <!--
-        <div class="column-one-half" id="dashboard-panel">
-          <br>
-          <p>Most recent published dataset</p>
-          <hr>
-          <p class="bold">Name</p>
-        </div>
-
-        <div class="column-one-half" id="dashboard-panel">
-          <br>
-          <p>Most recent updated dataset</p>
-          <hr>
-          <p class="bold">Downloads</p>
-        </div>
-        -->
-
+      </div>
     </div>
-  </div>
-
-</main>
+  </main>
 {% endblock %}

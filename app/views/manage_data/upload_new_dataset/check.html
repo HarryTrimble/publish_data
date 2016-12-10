@@ -1,0 +1,184 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+  Publish government data
+{% endblock %}
+
+{% block proposition_header %}
+  {% include "includes/propositional_navigation_service.html" %}
+{% endblock %}
+
+{% block header_class %}
+  with-proposition
+{% endblock %}
+
+{% block content %}
+
+<main id="content" role="main">
+
+{% include "includes/phase_banner_alpha.html" %}
+
+  <div class="grid-row">
+
+    {% include "includes/side-navigation.html" %}
+
+    <div class="column-two-thirds">
+
+      <h1 class="heading-large">
+        Check your dataset
+      </h1>
+
+      <table class="check-your-answers">
+        <tbody>
+          <tr>
+            <td>
+              Name
+            </td>
+            <td>
+              {{ data.newSet.title }}
+            </td>
+            <td class="change-answer">
+              <a href="title_summary?change=1">
+                Change <span class="visuallyhidden">dataset name</span>
+              </a>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              Description
+            </td>
+            <td>
+              {{ data.newSet.summary }}
+            </td>
+            <td class="change-answer">
+              <a href="title_summary?change=1">
+                Change <span class="visuallyhidden">description</span>
+              </a>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              Links
+            </td>
+            <td>
+              {% for link in data.newSet.links %}
+                {{ link.title }} <br/> {{ link.url }}
+              {% if link.isValid %}
+              <span class="link-valid">✔</span>
+              {% else %}
+              <span class="link-invalid">✘</span>
+              {% endif %}
+              <br/>
+              {% endfor %}
+            </td>
+            <td class="change-answer">
+              <a href="links?change=1">
+                Change <span class="visuallyhidden">url</span>
+              </a>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              Areas
+            </td>
+            <td>
+              <ul>
+                {% for area in data.newSet.geo %}
+                  <li>
+                    {{ area }}
+                  </li>
+                {% endfor %}
+              </ul>
+            </td>
+            <td class="change-answer">
+              <a href="geo?change=1">
+                Change <span class="visuallyhidden">area</span>
+              </a>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              Licence
+            </td>
+            <td>
+              {% if data.newSet.licence === 'Other' %}
+                {{ data.newSet.otherLicence }}
+              {% else %}
+                {{ data.newSet.licence }}
+              {% endif %}
+            </td>
+            <td class="change-answer">
+              <a href="licence?change=1">
+                Change <span class="visuallyhidden">license</span>
+              </a>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              Frequency Update
+            </td>
+            <td>
+              {{ data.newSet.frequency }}
+              <br/>
+              {% if data.newSet.frequency === 'week' %}
+              Start:
+              {{ data.newSet.startDay }} /
+              {{ data.newSet.startMonth }} /
+              {{ data.newSet.startyear }}
+              End:
+              {{ data.newSet.endDay }} /
+              {{ data.newSet.endMonth }} /
+              {{ data.newSet.endyear }}
+              {% elif data.newSet.frequency === 'month' %}
+              {{ data.newSet.periodMonth }} / {{ data.newSet.periodYear }}
+              {% elif data.newSet.frequency === 'quarter' %}
+              {{ data.newSet.periodQuarter }}
+              {% elif data.newSet.frequency === 'year' %}
+              {{ data.newSet.periodYear }}
+              {% endif %}
+            </td>
+            <td class="change-answer">
+              <a href="update_frequency?change=1">
+                Change <span class="visuallyhidden">frequency update</span>
+              </a>
+            </td>
+          </tr>
+
+          {% if data.newSet.frequency != 'none' %}
+            <tr>
+              <td>
+                Notifications
+              </td>
+              <td>
+                {{ data.newSet.notify }}
+              </td>
+              </td>
+              <td class="change-answer">
+                <a href="want_notifications?change=1">
+                  Change <span class="visuallyhidden">notifications</span>
+                </a>
+              </td>
+            </tr>
+          {% endif %}
+        </tbody>
+      </table>
+
+      <br/>
+
+      <form method="post" action="publish" class="form">
+        <div class="form-group">
+          <input type="submit" class="button" value="Accept"/>
+        </div>
+      </form>
+
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}
